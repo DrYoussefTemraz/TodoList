@@ -11,14 +11,17 @@ export default class Todo extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.toggeleForm = this.toggeleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
-
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
   }
   handleUpdate(evt){
     evt.preventDefault();
+    //take the new task and update the parent
+    //we create update function in the parent take arg of id and new task
+    this.props.updatedTodos(this.props.id, this.state.task);
+    this.setState({ isEditing: false });
   }
   //this toggle to make the boolean state to reverse
   toggeleForm(){
