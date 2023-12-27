@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
+import NewTodoForm from "./NewTodoForm";
 
 class TodoList extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class TodoList extends Component {
     return (
       <div>
         <h1>Todo List</h1>
+        <NewTodoForm />
         <ul>{todos}</ul>
       </div>
     );
