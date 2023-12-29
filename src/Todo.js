@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./Todo.css";
 export default class Todo extends Component {
   constructor(props) {
     super(props);
@@ -12,11 +12,12 @@ export default class Todo extends Component {
     this.toggeleForm = this.toggeleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
   }
-  handleUpdate(evt){
+  handleUpdate(evt) {
     evt.preventDefault();
     //take the new task and update the parent
     //we create update function in the parent take arg of id and new task
@@ -24,12 +25,16 @@ export default class Todo extends Component {
     this.setState({ isEditing: false });
   }
   //this toggle to make the boolean state to reverse
-  toggeleForm(){
-    this.setState({isEditing: !this.state.isEditing})
+  toggeleForm() {
+    this.setState({ isEditing: !this.state.isEditing });
   }
   handleRemove() {
     this.props.removeTodo(this.props.id);
   }
+  handleToggle(evt) {
+    this.props.toggleTodo(this.props.id);
+  }
+
   render() {
     let result;
     //add editing condition
@@ -53,7 +58,12 @@ export default class Todo extends Component {
           <button onClick={this.toggeleForm}>Edit</button>
           <button onClick={this.handleRemove}>X</button>
 
-          <li>{this.props.task}</li>
+          <li
+            className={this.props.completed ? "completed" : ""}
+            onClick={this.handleToggle}
+          >
+            {this.props.task}
+          </li>
         </div>
       );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import NewTodoForm from "./NewTodoForm";
+import "./TodoList.css";
 
 class TodoList extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class TodoList extends Component {
     this.create = this.create.bind(this);
     this.remove = this.remove.bind(this);
     this.update = this.update.bind(this);
+    this.togglCompletion = this.togglCompletion.bind(this);
 
   }
   create(NewTodo) {
@@ -21,17 +23,28 @@ class TodoList extends Component {
   }
   update(id, updatedTask) {
     //make a new array that return the object unchanged and just update the selected id
-    const updatedTodos = this.state.todos.map(todo => {
+    const updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         return { ...todo, task: updatedTask };
       }
       return todo;
     });
-    
-      this.setState({
-        todos: updatedTodos,
-      });
-    
+
+    this.setState({
+      todos: updatedTodos,
+    });
+  }
+  togglCompletion(id) {
+    const updatedTodos = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+
+    this.setState({
+      todos: updatedTodos,
+    });
   }
   render() {
     const todos = this.state.todos.map((todo) => {
@@ -41,7 +54,9 @@ class TodoList extends Component {
           id={todo.id}
           task={todo.task}
           removeTodo={this.remove}
+          completed={todo.completed}
           updatedTodos={this.update}
+          toggleTodo={this.togglCompletion}
         />
       );
     });
