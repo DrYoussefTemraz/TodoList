@@ -16,6 +16,7 @@ export default class NewTodoForm extends Component {
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
   }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

@@ -8,6 +8,7 @@ export default class Todo extends Component {
       //add a task as state that we change with edit/update
       task: this.props.task,
     };
+
     this.handleRemove = this.handleRemove.bind(this);
     this.toggeleForm = this.toggeleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
